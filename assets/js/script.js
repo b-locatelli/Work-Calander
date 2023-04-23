@@ -1,19 +1,10 @@
-// var timeDisplayEl = $('#time-display');
+
 var eventsData = {};
 var savedData = {};
-// function displayTime() {
-//     var rightNow = moment().format('MMM DD, YYYY [at] hh:mm:ss a');
-//     var dayOfWeek = moment().format('dddd');
-//     timeDisplayEl.text(rightNow + ", " + dayOfWeek + "");
-// }
-
-// setInterval(displayTime, 1000);
-
 
 $("#currentDay").text(moment().format('dddd, MMM do YYYY'));
 
-
-
+// sets the class to the timeblocks to display color
 function setHourColors() {
     var now = dayjs();
     for (var i = 9; i <= 17; i++){
@@ -27,6 +18,7 @@ function setHourColors() {
     }
 }
 
+// loads stored data
 function loadStoredData() {
     eventsData = JSON.parse(localStorage.getItem("calendarEvents"));
     if (eventsData !== null){
@@ -47,6 +39,7 @@ function loadStoredData() {
 
 }
 
+// sets the stored data
 function handleSaveClick(event) {
     var hourBlock = $(event.target).parent();
     var value = hourBlock.children("textarea").val();
@@ -55,6 +48,7 @@ function handleSaveClick(event) {
     localStorage.setItem("calendarEvents", JSON.stringify(eventsData));
 }
 
+// loop for text area input
 function generate(){
     for (var i = 9; i < 18; i++){
         let textblockId = 'hour'+ i;
@@ -64,7 +58,7 @@ function generate(){
     }
 }
 
-
+// loads data and hour color functions on start
 $(function() {
     loadStoredData();
     setHourColors();
